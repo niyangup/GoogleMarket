@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity {
 	class MyAdapter extends FragmentPagerAdapter {
 		private String[] mTabNames;
 
-		// TODO
 		public MyAdapter(FragmentManager fm) {
 			super(fm);
 			// 加载页面标题数组
