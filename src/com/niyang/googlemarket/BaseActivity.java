@@ -1,4 +1,4 @@
-package com.niyang.googlemarket.view;
+package com.niyang.googlemarket;
 
 import android.support.v4.app.FragmentActivity;
 

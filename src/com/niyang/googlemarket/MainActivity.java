@@ -3,7 +3,6 @@ package com.niyang.googlemarket;
 import com.niyang.googlemarket.fragment.BaseFragment;
 import com.niyang.googlemarket.fragment.FragmentFactory;
 import com.niyang.googlemarket.utils.UIUtils;
-import com.niyang.googlemarket.view.BaseActivity;
 import com.niyang.googlemarket.view.PagerTab;
 
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Window;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,6 +31,23 @@ public class MainActivity extends BaseActivity {
 
 		mPagerTab.setViewPager(mViewPager);// 将指针和viewpager绑定在一起
 
+		mPagerTab.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int position) {
+				BaseFragment fragment = FragmentFactory.createFragment(position);
+				fragment.loadData();
+			}
+			
+			@Override
+			public void onPageScrolled(int position, float arg1, int arg2) {
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int position) {
+				
+			}
+		});
 	}
 
 	class MyAdapter extends FragmentPagerAdapter {
@@ -52,7 +68,7 @@ public class MainActivity extends BaseActivity {
 		// 返回position位置的fragment对象
 		@Override
 		public Fragment getItem(int position) {
-			BaseFragment fragment = FragmentFactory.getFragment(position);
+			BaseFragment fragment = FragmentFactory.createFragment(position);
 			return fragment;
 		}
 
@@ -62,7 +78,5 @@ public class MainActivity extends BaseActivity {
 			return mTabNames.length;
 		}
 		
-		
-
 	}
 }

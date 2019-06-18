@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class FragmentFactory {
 	private static HashMap<Integer, BaseFragment> mFragmentMap = new HashMap<Integer, BaseFragment>();
 
-	public static BaseFragment getFragment(int pos) {
+	public static BaseFragment createFragment(int pos) {
 		// 先从集合中取,如果没有才创建对象,提高性能
 		BaseFragment fragment = mFragmentMap.get(pos);
 

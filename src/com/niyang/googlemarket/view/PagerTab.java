@@ -1,5 +1,6 @@
 package com.niyang.googlemarket.view;
 
+import com.niyang.googlemarket.BaseActivity;
 import com.niyang.googlemarket.R;
 import com.niyang.googlemarket.utils.UIUtils;
 
