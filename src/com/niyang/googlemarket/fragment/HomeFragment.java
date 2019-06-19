@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.niyang.googlemarket.R;
 import com.niyang.googlemarket.adapter.MyBaseAdapter;
+import com.niyang.googlemarket.holder.BaseHolder;
+import com.niyang.googlemarket.holder.HomeHolder;
 import com.niyang.googlemarket.utils.UIUtils;
 import com.niyang.googlemarket.view.LoadingPage.ResultState;
 
@@ -52,22 +54,27 @@ public class HomeFragment extends BaseFragment {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder = null;
-			if (convertView == null) {
-				viewHolder = new ViewHolder();
-
-				convertView = UIUtils.inflate(R.layout.list_item_home);
-				viewHolder.content = (TextView) convertView.findViewById(R.id.tv_content);
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-
-			String content = getItem(position);
-			viewHolder.content.setText(content);
-			return convertView;
+		public BaseHolder<String> getHolder() {
+			return new HomeHolder();
 		}
+
+//		@Override
+//		public View getView(int position, View convertView, ViewGroup parent) {
+//			ViewHolder viewHolder = null;
+//			if (convertView == null) {
+//				viewHolder = new ViewHolder();
+//
+//				convertView = UIUtils.inflate(R.layout.list_item_home);
+//				viewHolder.content = (TextView) convertView.findViewById(R.id.tv_content);
+//				convertView.setTag(viewHolder);
+//			} else {
+//				viewHolder = (ViewHolder) convertView.getTag();
+//			}
+//
+//			String content = getItem(position);
+//			viewHolder.content.setText(content);
+//			return convertView;
+//		}
 
 	}
 
