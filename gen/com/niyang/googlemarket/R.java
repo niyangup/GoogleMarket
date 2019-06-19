@@ -115,21 +115,24 @@ public final class R {
         public static final int subject_default=0x7f02003b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0007;
-        public static final int button1=0x7f0a0005;
-        public static final int imageView1=0x7f0a0003;
+        public static final int action_settings=0x7f0a0009;
+        public static final int button1=0x7f0a0008;
+        public static final int imageView1=0x7f0a0006;
+        public static final int ll_load_more=0x7f0a0003;
         public static final int pager_tab=0x7f0a0000;
-        public static final int progressBar1=0x7f0a0006;
-        public static final int textView1=0x7f0a0004;
+        public static final int progressBar1=0x7f0a0004;
+        public static final int textView1=0x7f0a0007;
         public static final int tv_content=0x7f0a0002;
+        public static final int tv_load_error=0x7f0a0005;
         public static final int viewpager=0x7f0a0001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int list_item_home=0x7f030001;
-        public static final int page_empty=0x7f030002;
-        public static final int page_error=0x7f030003;
-        public static final int page_loading=0x7f030004;
+        public static final int list_item_more=0x7f030002;
+        public static final int page_empty=0x7f030003;
+        public static final int page_error=0x7f030004;
+        public static final int page_loading=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f090000;

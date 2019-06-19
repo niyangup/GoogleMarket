@@ -9,6 +9,7 @@ import com.niyang.googlemarket.holder.HomeHolder;
 import com.niyang.googlemarket.utils.UIUtils;
 import com.niyang.googlemarket.view.LoadingPage.ResultState;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -33,6 +34,7 @@ public class HomeFragment extends BaseFragment {
 
 		ListView view = new ListView(UIUtils.getContext());
 		view.setAdapter(new HomeAdapter(data));
+		
 		return view;
 	}
 
@@ -52,10 +54,22 @@ public class HomeFragment extends BaseFragment {
 		public HomeAdapter(ArrayList<String> data) {
 			super(data);
 		}
+		
 
 		@Override
 		public BaseHolder<String> getHolder() {
 			return new HomeHolder();
+		}
+
+		//此方法在子线程调用
+		@Override
+		public ArrayList<String> onLoadMore() {
+			ArrayList<String> moreData=new ArrayList<String>();
+			for (int i = 0; i < 10; i++) {
+				moreData.add("测试更多数据:"+i);
+			}
+			SystemClock.sleep(2000);
+			return moreData;
 		}
 
 //		@Override
