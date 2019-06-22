@@ -89,10 +89,10 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 			holder.setData(getItem(position));
 		} else {
 			// 加载更多类型
-			//只有在有更多数据的状态下才加载更多
-			MoreHolder moreHolder=(MoreHolder) holder;
-			
-			if (moreHolder.getData()==MoreHolder.STATE_MORE_MORE) {
+			// 只有在有更多数据的状态下才加载更多
+			MoreHolder moreHolder = (MoreHolder) holder;
+
+			if (moreHolder.getData() == MoreHolder.STATE_MORE_MORE) {
 				loadMore(moreHolder);
 			}
 		}
@@ -122,17 +122,17 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 									// 还有更多数据
 									holder.setData(MoreHolder.STATE_MORE_MORE);
 								}
-								
-								//将更多数据追加到当前集合中
+
+								// 将更多数据追加到当前集合中
 								data.addAll(moreData);
-								//刷新界面
+								// 刷新界面
 								MyBaseAdapter.this.notifyDataSetChanged();
-								
+
 							} else {
 								// 加载更多失败
 								holder.setData(MoreHolder.STATE_MORE_ERROR);
 							}
-							
+
 							isLoadMore = false;
 						}
 					});
@@ -151,6 +151,10 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 	// 子类可以重写此方法来决定是否加载更多
 	public boolean hasMore() {
 		return true;
+	}
+
+	public int getListSize() {
+		return data.size();
 	}
 
 }

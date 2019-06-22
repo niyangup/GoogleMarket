@@ -1,16 +1,16 @@
 package com.niyang.googlemarket.fragment;
 
+import java.util.ArrayList;
+
 import com.niyang.googlemarket.utils.UIUtils;
 import com.niyang.googlemarket.view.LoadingPage;
 import com.niyang.googlemarket.view.LoadingPage.ResultState;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public abstract class BaseFragment extends Fragment {
 	
@@ -47,6 +47,20 @@ public abstract class BaseFragment extends Fragment {
 			mLoadingPage.loadData();
 		}
 	}
+	
+	 public LoadingPage.ResultState check(Object obj){
+	        if(obj!=null){
+	            if (obj  instanceof ArrayList){
+	                ArrayList list= (ArrayList) obj;
+	                if (list.isEmpty()){
+	                    return LoadingPage.ResultState.STATE_EMPTY;
+	                }else {
+	                    return LoadingPage.ResultState.STATE_SUCESS;
+	                }
+	            }
+	        }
+	        return LoadingPage.ResultState.STATE_ERROR;
+	    }
 		
 	
 }

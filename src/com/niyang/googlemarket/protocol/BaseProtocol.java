@@ -16,18 +16,26 @@ import com.niyang.googlemarket.utils.UIUtils;
  * 访问网络的基类
  * 
  * @author niyang
+ * @param <T>
  *
  */
-public abstract class BaseProtocol {
+public abstract class BaseProtocol<T> {
 
 	// index 表示的是从哪个位置开始返回20条数据,用于分页
-	public void getData(int index) {
+	public T getData(int index) {
 		// 先判断是否有缓存,有的话就加载缓存
 		String result = getCache(index);
 
 		if (StringUtils.isEmpty(result)) {
 			result=getDataFromServer(index);
 		}
+		
+		if (result!=null) {
+			T data = parseData(result);
+			return data;
+		}
+		
+		return null;
 	}
 
 	// 从网络请求数据
@@ -39,6 +47,12 @@ public abstract class BaseProtocol {
 		if (httpResult != null) {
 			String result = httpResult.getString();
 			System.out.println("访问结果:" + result);
+			
+			//写缓存
+			if (!StringUtils.isEmpty(result)) {
+				setCache(index, result);
+			}
+			
 			return result;
 		}
 		return null;
@@ -105,4 +119,7 @@ public abstract class BaseProtocol {
 		}
 		return null;
 	}
+	
+	//解析数据
+	public abstract T parseData(String result);
 }

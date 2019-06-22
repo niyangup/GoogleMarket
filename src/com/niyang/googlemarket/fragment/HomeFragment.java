@@ -2,17 +2,16 @@ package com.niyang.googlemarket.fragment;
 
 import java.util.ArrayList;
 
-import com.niyang.googlemarket.R;
 import com.niyang.googlemarket.adapter.MyBaseAdapter;
+import com.niyang.googlemarket.domain.AppInfo;
 import com.niyang.googlemarket.holder.BaseHolder;
 import com.niyang.googlemarket.holder.HomeHolder;
+import com.niyang.googlemarket.protocol.HomeProtocol;
 import com.niyang.googlemarket.utils.UIUtils;
 import com.niyang.googlemarket.view.LoadingPage.ResultState;
 
 import android.os.SystemClock;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ import android.widget.TextView;
  */
 public class HomeFragment extends BaseFragment {
 
-	private ArrayList<String> data;
+	private ArrayList<AppInfo> data;
 
 	// 如果加载成功,就回调此方法,在主线程运行
 	@Override
@@ -41,34 +40,40 @@ public class HomeFragment extends BaseFragment {
 	// 运行在子线程,可以直接执行耗时网络操作
 	@Override
 	public ResultState onLoad() {
-		data = new ArrayList<String>();
-		for (int i = 0; i < 20; i++) {
-			data.add("测试数据:" + i);
-		}
+//		data = new ArrayList<String>();
+//		for (int i = 0; i < 20; i++) {
+//			data.add("测试数据:" + i);
+//		}
+		
+		HomeProtocol protocol=new HomeProtocol();
+		data = protocol.getData(0);
 
-		return ResultState.STATE_SUCESS;
+		return check(data);
 	}
 
-	class HomeAdapter extends MyBaseAdapter<String> {
+	class HomeAdapter extends MyBaseAdapter<AppInfo> {
 
-		public HomeAdapter(ArrayList<String> data) {
+		public HomeAdapter(ArrayList<AppInfo> data) {
 			super(data);
 		}
 		
 
 		@Override
-		public BaseHolder<String> getHolder() {
+		public BaseHolder<AppInfo> getHolder() {
 			return new HomeHolder();
 		}
 
 		//此方法在子线程调用
 		@Override
-		public ArrayList<String> onLoadMore() {
-			ArrayList<String> moreData=new ArrayList<String>();
-			for (int i = 0; i < 10; i++) {
-				moreData.add("测试更多数据:"+i);
-			}
-			SystemClock.sleep(2000);
+		public ArrayList<AppInfo> onLoadMore() {
+//			ArrayList<AppInfo> moreData=new ArrayList<AppInfo>();
+//			for (int i = 0; i < 10; i++) {
+//				moreData.add("测试更多数据:"+i);
+//			}
+//			SystemClock.sleep(2000);
+			
+			HomeProtocol protocol = new HomeProtocol();
+			ArrayList<AppInfo>moreData=protocol.getData(getListSize());
 			return moreData;
 		}
 
@@ -95,4 +100,5 @@ public class HomeFragment extends BaseFragment {
 	static class ViewHolder {
 		public TextView content;
 	}
+
 }
