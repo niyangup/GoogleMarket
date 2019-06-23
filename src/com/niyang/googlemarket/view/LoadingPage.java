@@ -6,6 +6,7 @@ import com.niyang.googlemarket.utils.UIUtils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 /**
@@ -53,6 +54,16 @@ public abstract class LoadingPage extends FrameLayout {
 		// 初始化加载失败的布局
 		if (mErrorPage == null) {
 			mErrorPage = UIUtils.inflate(R.layout.page_error);
+			Button mBtnRetry=(Button) mErrorPage.findViewById(R.id.btn_retry);
+			mBtnRetry.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					//重新加载数据
+					loadData();
+				}
+			});
+			
 			addView(mErrorPage);
 		}
 
